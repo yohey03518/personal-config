@@ -1,0 +1,180 @@
+{
+  "vim.leader": " ", //default leader key is whitespace
+  "window.zoomLevel": 2,
+  "vim.useCtrlKeys": true,
+  "vim.handleKeys": {
+    "<C-c>": false,
+    "<C-v>": false,
+    "<C-f>": false,
+    "<C-a>": true,
+    "<C-x>": true
+  },
+  "vim.useSystemClipboard": false,
+  "editor.lineNumbers": "relative",
+  "editor.formatOnSave": false,
+  "vim.autoSwitchInputMethod.enable": true,
+  "vim.autoSwitchInputMethod.defaultIM": "1033",
+  "vim.autoSwitchInputMethod.obtainIMCmd": "D:\\vscodevim\\im-select.exe",
+  "vim.autoSwitchInputMethod.switchIMCmd": "D:\\vscodevim\\im-select.exe {im}",
+  "vim.foldfix": true,
+  "vim.normalModeKeyBindings": [
+  {
+      "before": ["z", ";"],
+      "after": ["z", "l", ";"]
+    }],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["h", "h"],
+      "after": ["^"]
+    },
+    {
+      "before": ["z", "s", "a"],
+      "after": ["g", "g", "v", "G", "$"]
+    },
+    {
+      "before": [" "],
+      "after": ["leader", "leader", "s"]
+    },
+    {
+      "before": ["leader", "s"],
+      "after": ["y", "s", "s"]
+    },
+    {
+      "before": ["leader", " "],
+      "after": ["leader", "leader", "leader", "b", "d", "w"]
+    },
+    {
+      "before": ["z", "l"],
+      "after": ["$", "a"]
+    },
+    {
+      "before": ["z", "b"],
+      "after": ["c", "i", "w"]
+    },
+    {
+      "before": ["z", ","],
+      "after": ["v", "i", ")"]
+    },
+    {
+      "before": ["z", "."],
+      "after": ["v", "i", "}"]
+    },
+    {
+      "before": ["z", "'"],
+      "after": ["v", "i", "'"]
+    },
+    {
+      "before": ["z", ">"],
+      "after": ["v", "i", "t"]
+    },
+    {
+      "before": ["leader", "c"],
+      "after": ["c", "i", "\""]
+    },
+    {
+      "before": ["z", "\""],
+      "after": ["v", "i", "\""]
+    },
+    {
+      "before": [",", "p"],
+      "after": ["\"", "0", "p"]
+    },
+    {
+      "before": ["z", "k"],
+      "commands": ["extension.vim_ctrl+o"]
+    },
+    {
+      "before": ["z", "f"],
+      "commands": ["editor.action.goToImplementation"]
+    },
+    {
+      "before": ["h", "c"],
+      "after": ["^", "C"]
+    },
+    {
+      "before": ["z", "`"],
+      "commands": [{ "command": "workbench.action.toggleSidebarVisibility" }]
+    },
+    {
+      "before": ["z", "r", "r"],
+      "commands": [{ "command": "editor.action.rename" }]
+    },
+    {
+      "before": ["z", "g", "c"],
+      "commands": [{ "command": "workbench.scm.focus" }]
+    },
+    {
+      "before": ["q", "q"],
+      "after": ["Z", "Q"]
+    },
+    {
+      "before": ["Q", "Q"],
+      "commands": [{ "command": "workbench.action.closeEditorInAllGroups" }]
+    },
+    {
+      "before": ["Q", "W"],
+      "commands": [{ "command": "workbench.action.closeAllEditors" }]
+    }
+  ],
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["z", ";"],
+      "after": ["<Esc>", "z", ";"]
+    },
+    {
+      "before": ["j", "j"],
+      "after": ["<Esc>"]
+    },
+    {
+      "before": ["z", "s", "a"],
+      "after": ["<Esc>", "g", "g", "v", "G", "$"]
+    },
+    {
+      "before": ["z", "h"],
+      "after": ["<Esc>", "I"]
+    },
+    {
+      "before": ["z", "l"],
+      "after": ["<Esc>", "A"]
+    },
+    {
+      "before": ["z", ",", "p"],
+      "after": ["<esc>", "\"", "0", "p"]
+    }
+  ],
+  "vim.visualModeKeyBindings": [
+    {
+      "before": ["M"],
+      "commands": ["cmstead.jsRefactor.extractMethod"]
+    },
+    {
+      "before": ["z", "r", "v"],
+      "commands": ["cmstead.jsRefactor.extractVariable"]
+    }
+  ],
+  "vim.easymotion": true,
+  "workbench.colorTheme": "Solarized Dark",
+  "sync.gist": "940eecfebe0aa35b45ee0d62e68bcd56",
+  "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+  "tabnine.experimentalAutoImports": true,
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "emmet.triggerExpansionOnTab": true,
+  "[css]": {
+    "editor.defaultFormatter": "stylelint.vscode-stylelint"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "Vue.volar"
+  },
+  "editor.tabSize": 2,
+  "security.workspace.trust.untrustedFiles": "open",
+  "emeraldwalk.runonsave": {
+  
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "Vue.volar"
+  }
+}
