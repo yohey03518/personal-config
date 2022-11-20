@@ -12,10 +12,10 @@
   "vim.useSystemClipboard": false,
   "editor.lineNumbers": "relative",
   "editor.formatOnSave": false,
-  "vim.autoSwitchInputMethod.enable": true,
-  "vim.autoSwitchInputMethod.defaultIM": "1033",
-  "vim.autoSwitchInputMethod.obtainIMCmd": "D:\\vscodevim\\im-select.exe",
-  "vim.autoSwitchInputMethod.switchIMCmd": "D:\\vscodevim\\im-select.exe {im}",
+  // "vim.autoSwitchInputMethod.enable": true,
+  // "vim.autoSwitchInputMethod.defaultIM": "1033",
+  // "vim.autoSwitchInputMethod.obtainIMCmd": "D:\\vscodevim\\im-select.exe",
+  // "vim.autoSwitchInputMethod.switchIMCmd": "D:\\vscodevim\\im-select.exe {im}",
   "vim.foldfix": true,
   "vim.normalModeKeyBindings": [
   {
