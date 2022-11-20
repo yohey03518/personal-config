@@ -378,8 +378,16 @@ function localdb(){
      D:\lets_use_localdb.ps1
 }
 
+$env:myConfigRootPath = "D:\git\personal-config"
+$env:pwshConfigFileName = "Microsoft.PowerShell_profile.ps1"
+$env:pwshPath = "$env:USERPROFILE\Documents\Powershell"
+
 function syncFromLocal(){
-    Copy-Item $env:USERPROFILE\Documents\Powershell\Microsoft.PowerShell_profile.ps1 D:\git\personal-config\cmd\Microsoft.PowerShell_profile.ps1
+    Copy-Item $env:pwshPath\$env:pwshConfigFileName $env:myConfigRootPath\cmd\$env:pwshConfigFileName
+}
+
+function syncToLocal(){
+    Copy-Item $env:myConfigRootPath\cmd\$env:pwshConfigFileName $env:pwshPath
 }
 
 # Clear-HostImport-Module -Name Terminal-Icons
