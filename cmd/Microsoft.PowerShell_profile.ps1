@@ -381,13 +381,20 @@ function localdb(){
 $env:myConfigRootPath = "D:\git\personal-config"
 $env:pwshConfigFileName = "Microsoft.PowerShell_profile.ps1"
 $env:pwshPath = "$env:USERPROFILE\Documents\Powershell"
+$env:vsCodePath = "$env:APPDATA\Code\User"
+$env:vsCodeKeyBindingFileName = "keybindings.json"
+$env:vsCodeSettingFileName = "settings.json"
 
 function syncFromLocal(){
     Copy-Item $env:pwshPath\$env:pwshConfigFileName $env:myConfigRootPath\cmd\$env:pwshConfigFileName
+    Copy-Item $env:vsCodePath\$env:vsCodeKeyBindingFileName $env:myConfigRootPath\vs-code\$env:vsCodeKeyBindingFileName
+    Copy-Item $env:vsCodePath\$env:vsCodeSettingFileName $env:myConfigRootPath\vs-code\$env:vsCodeSettingFileName
 }
 
 function syncToLocal(){
-    Copy-Item $env:myConfigRootPath\cmd\$env:pwshConfigFileName $env:pwshPath
+    Copy-Item $env:myConfigRootPath\cmd\$env:pwshConfigFileName $env:pwshPath\$env:pwshConfigFileName
+    Copy-Item $env:myConfigRootPath\vs-code\$env:vsCodeKeyBindingFileName $env:vsCodePath\$env:vsCodeKeyBindingFileName
+    Copy-Item $env:myConfigRootPath\vs-code\$env:vsCodeSettingFileName $env:vsCodePath\$env:vsCodeSettingFileName
 }
 
 # Clear-HostImport-Module -Name Terminal-Icons
