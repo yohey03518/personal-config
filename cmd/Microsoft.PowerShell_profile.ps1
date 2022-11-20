@@ -331,8 +331,9 @@ Register-ArgumentCompleter -Native -CommandName dotnet -ScriptBlock {
      }
 }
 
-Set-PoshPrompt -Theme "C:\Users\erwin.chang73\.ohmyposh-customize.omp.json"
-
+oh-my-posh init pwsh --config "D:\git\personal-config\cmd\.ohmyposh-customize.omp.json" | Invoke-Expression
+#oh-my-posh init pwsh | Invoke-Expression
+# oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\unicorn.omp.json"  | Invoke-Expression
 function gpp() {
     git pull
 }
@@ -377,4 +378,8 @@ function localdb(){
      D:\lets_use_localdb.ps1
 }
 
-Clear-Host
+function syncFromLocal(){
+    Copy-Item $env:USERPROFILE\Documents\Powershell\Microsoft.PowerShell_profile.ps1 D:\git\personal-config\cmd\Microsoft.PowerShell_profile.ps1
+}
+
+# Clear-HostImport-Module -Name Terminal-Icons
