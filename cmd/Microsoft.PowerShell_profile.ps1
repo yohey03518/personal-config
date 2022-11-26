@@ -384,17 +384,20 @@ $env:pwshPath = "$env:USERPROFILE\Documents\Powershell"
 $env:vsCodePath = "$env:APPDATA\Code\User"
 $env:vsCodeKeyBindingFileName = "keybindings.json"
 $env:vsCodeSettingFileName = "settings.json"
-
+$env:riderKeyMapPath = "$env:APPDATA\JetBrains\Rider2022.2\keymaps"
+$env:riderKeyMapFileName = "Visual Studio _Migrated_.xml"
 function syncFromLocal(){
     Copy-Item $env:pwshPath\$env:pwshConfigFileName $env:myConfigRootPath\cmd\$env:pwshConfigFileName
     Copy-Item $env:vsCodePath\$env:vsCodeKeyBindingFileName $env:myConfigRootPath\vs-code\$env:vsCodeKeyBindingFileName
     Copy-Item $env:vsCodePath\$env:vsCodeSettingFileName $env:myConfigRootPath\vs-code\$env:vsCodeSettingFileName
+    Copy-Item $env:riderKeyMapPath\$env:riderKeyMapFileName $env:myConfigRootPath\rider\$env:riderKeyMapFileName
 }
 
 function syncToLocal(){
     Copy-Item $env:myConfigRootPath\cmd\$env:pwshConfigFileName $env:pwshPath\$env:pwshConfigFileName
     Copy-Item $env:myConfigRootPath\vs-code\$env:vsCodeKeyBindingFileName $env:vsCodePath\$env:vsCodeKeyBindingFileName
     Copy-Item $env:myConfigRootPath\vs-code\$env:vsCodeSettingFileName $env:vsCodePath\$env:vsCodeSettingFileName
+    Copy-Item $env:myConfigRootPath\rider\$env:riderKeyMapFileName $env:riderKeyMapPath\$env:riderKeyMapFileName 
 }
 
 # Clear-HostImport-Module -Name Terminal-Icons
