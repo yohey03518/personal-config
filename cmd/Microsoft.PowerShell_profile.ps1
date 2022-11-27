@@ -386,11 +386,13 @@ $env:vsCodeKeyBindingFileName = "keybindings.json"
 $env:vsCodeSettingFileName = "settings.json"
 $env:riderKeyMapPath = "$env:APPDATA\JetBrains\Rider2022.2\keymaps"
 $env:riderKeyMapFileName = "Visual Studio _Migrated_.xml"
+$env:gitConfigFileName = ".gitconfig"
 function syncFromLocal(){
     Copy-Item $env:pwshPath\$env:pwshConfigFileName $env:myConfigRootPath\cmd\$env:pwshConfigFileName
     Copy-Item $env:vsCodePath\$env:vsCodeKeyBindingFileName $env:myConfigRootPath\vs-code\$env:vsCodeKeyBindingFileName
     Copy-Item $env:vsCodePath\$env:vsCodeSettingFileName $env:myConfigRootPath\vs-code\$env:vsCodeSettingFileName
     Copy-Item $env:riderKeyMapPath\$env:riderKeyMapFileName $env:myConfigRootPath\rider\$env:riderKeyMapFileName
+    Copy-Item $env:USERPROFILE\$env:gitConfigFileName $env:myConfigRootPath\git\$env:gitConfigFileName
 }
 
 function syncToLocal(){
@@ -398,6 +400,7 @@ function syncToLocal(){
     Copy-Item $env:myConfigRootPath\vs-code\$env:vsCodeKeyBindingFileName $env:vsCodePath\$env:vsCodeKeyBindingFileName
     Copy-Item $env:myConfigRootPath\vs-code\$env:vsCodeSettingFileName $env:vsCodePath\$env:vsCodeSettingFileName
     Copy-Item $env:myConfigRootPath\rider\$env:riderKeyMapFileName $env:riderKeyMapPath\$env:riderKeyMapFileName 
+    Copy-Item $env:myConfigRootPath\git\$env:gitConfigFileName $env:USERPROFILE\$env:gitConfigFileName 
 }
 
 # Clear-HostImport-Module -Name Terminal-Icons
