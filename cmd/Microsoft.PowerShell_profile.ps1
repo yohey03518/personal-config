@@ -360,11 +360,11 @@ function gosleep(){
 }
 
 function hostfile(){
-	code C:\Windows\System32\drivers\etc\hosts
+	sudo notepad C:\Windows\System32\drivers\etc\hosts
 }
 
 function gpts() {
-	C:\Users\erwin.chang73\Desktop\commands\pull-team-shared.sh
+	D:\pull-team-shared.sh
 }
 
 function cc() {
