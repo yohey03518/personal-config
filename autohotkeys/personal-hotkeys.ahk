@@ -19,3 +19,7 @@ return
 !F3::
 SendRaw zxcv1234
 return
+
+!1::
+WinActivate PowerShell
+return
