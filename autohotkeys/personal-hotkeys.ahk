@@ -23,3 +23,7 @@ return
 !1::
 WinActivate PowerShell
 return
+
+!2::
+WinActivate ,ahk_exe 1Password.exe
+return
