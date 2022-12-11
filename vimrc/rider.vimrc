@@ -21,7 +21,7 @@ nmap zvh :action Vcs.ShowTabbedFileHistory<CR>
 "[Unit Test]"
 nmap zrt :action RiderUnitTestRunContextAction<CR>
 "無法跑完測試後回去!
-nmap zrT ?[Test<CR>k:action RiderUnitTestRunContextAction<CR>
+nmap zrT ?[TestFixture<CR>k:action RiderUnitTestRunContextAction<CR>
 "nmap zrT ?class<CR>w:action RiderUnitTestRunContextAction<CR>:action Back<CR>
 "imap <F1> <Esc>jy?[T<CR>P/public<CR>f(b:action ReformatCode<CR>
 imap <F1> <Esc>?[Te<CR>Vjj%yjj%p<Esc>:action ReformatCode<CR>
