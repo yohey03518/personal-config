@@ -378,6 +378,10 @@ function localdb(){
      D:\lets_use_localdb.ps1
 }
 
+function config() {
+    code D:\git\personal-config\
+}
+
 $env:myConfigRootPath = "D:\git\personal-config"
 $env:pwshConfigFileName = "Microsoft.PowerShell_profile.ps1"
 $env:pwshPath = "$env:USERPROFILE\Documents\Powershell"
