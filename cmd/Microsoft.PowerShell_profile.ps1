@@ -351,7 +351,6 @@ Set-Alias k kubectl
 
 function vs(){
 	./*.sln
-
 }
 # If (Test-Path Alias:sleep) {Remove-Item Alias:sleep}
 function gosleep(){
@@ -380,6 +379,18 @@ function localdb(){
 
 function config() {
     code D:\git\personal-config\
+}
+
+function wd(){
+    wsl docker $args
+}
+
+function wkmini(){
+    wsl minikube $args
+}
+
+function wk(){
+    wsl kubectl $args
 }
 
 $env:myConfigRootPath = "D:\git\personal-config"
