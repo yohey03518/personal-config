@@ -393,6 +393,10 @@ function wk(){
     wsl kubectl $args
 }
 
+function kns(){
+    kubectl config set-context --current --namespace=$args
+}
+
 $env:myConfigRootPath = "D:\git\personal-config"
 $env:pwshConfigFileName = "Microsoft.PowerShell_profile.ps1"
 $env:pwshPath = "$env:USERPROFILE\Documents\Powershell"
