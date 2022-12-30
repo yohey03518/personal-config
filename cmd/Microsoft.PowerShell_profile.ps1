@@ -348,6 +348,8 @@ function gca(){
 }
 
 Set-Alias k kubectl
+Set-Alias kx kubectx
+Set-Alias kns kubens
 
 function vs(){
 	./*.sln
@@ -393,9 +395,11 @@ function wk(){
     wsl kubectl $args
 }
 
-function kns(){
-    kubectl config set-context --current --namespace=$args
-}
+#function kns(){
+#    kubens $args
+    #kubectl config set-context --current --namespace=$args
+#}
+
 
 $env:myConfigRootPath = "D:\git\personal-config"
 $env:pwshConfigFileName = "Microsoft.PowerShell_profile.ps1"
