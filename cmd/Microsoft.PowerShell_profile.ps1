@@ -334,6 +334,7 @@ Register-ArgumentCompleter -Native -CommandName dotnet -ScriptBlock {
 oh-my-posh init pwsh --config "D:\git\personal-config\cmd\.ohmyposh-customize.omp.json" | Invoke-Expression
 #oh-my-posh init pwsh | Invoke-Expression
 # oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\unicorn.omp.json"  | Invoke-Expression
+
 function gpp() {
     git pull
 }
@@ -426,4 +427,9 @@ function syncToLocal(){
     Copy-Item $env:myConfigRootPath\git\$env:gitConfigFileName $env:USERPROFILE\$env:gitConfigFileName 
 }
 
-# Clear-HostImport-Module -Name Terminal-Icons
+#Enable kubectl autocompletion with alias k
+(kubectl completion powershell)  -replace "'kubectl'", "'k'" | Out-String | Invoke-Expression
+
+#install: Install-Module ZLocation -Scope CurrentUser 
+Import-Module ZLocation
+
