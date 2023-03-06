@@ -1,3 +1,4 @@
+:mapclear
 nmap zso :source ~/erwin.vimrc<CR>
 "toggle relative line number
 "絕對行號
