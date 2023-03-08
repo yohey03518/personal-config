@@ -1,5 +1,5 @@
 :mapclear
-nmap zso :source ~/erwin.vimrc<CR>
+nmap zso :source ~/.ideavimrc<CR>
 "toggle relative line number
 "絕對行號
 nmap zrl :set relativenumber!<CR>
@@ -115,3 +115,4 @@ nmap <Tab> :action EditorIndentLineOrSelection<CR>
 nmap <S-Tab> :action EditorUnindentSelection<CR>
 vmap <Tab> :action EditorIndentLineOrSelection<CR>
 vmap <S-Tab> :action EditorUnindentSelection<CR>
+nmap zsp vi":action IntroduceParameter<CR>
