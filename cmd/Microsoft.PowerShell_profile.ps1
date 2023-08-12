@@ -401,6 +401,81 @@ function wk(){
     #kubectl config set-context --current --namespace=$args
 #}
 
+function krl(){
+# 獲取所有的 pods 的 JSON 描述
+$pods = kubectl get pods -o json | ConvertFrom-Json
+
+# 建立一個 hashtable 來存儲每個 pod 下的 containers
+$podContainers = @{}
+$podMemoryList = @()
+
+foreach ($pod in $pods.items)
+{
+  $podName = $pod.metadata.name
+  $podContainers[$podName] = @()
+
+  # 從 pod 的 JSON 描述中取得每個 container 的名稱和 Requested Memory
+  foreach ($container in $pod.spec.containers)
+  {
+    $containerName = $container.name
+	$requestedMemory = ConvertToMiB $container.resources.requests.memory
+	$requestedCpu = $container.resources.requests.cpu
+    $podContainers[$podName] += @{ "Name" = $containerName; "RequestedMemory" = $requestedMemory; "RequestedCpu" = $requestedCpu }
+  }
+}
+
+$podsInfo = kubectl top pod --containers --no-headers
+
+# 解析出每個 pod 的每個 container 的 Used Memory
+foreach ($podInfo in $podsInfo)
+{
+  $data = ($podInfo -replace '\s+', ' ')
+  $podName = $data.Split(" ")[0]
+  $usedMemory = $data.Split(" ")[3]
+  $usedCpu = $data.Split(" ")[2]
+
+  foreach ($container in $podContainers[$podName])
+  {
+    $containerName = $container["Name"]
+    $requestedMemory = $container["RequestedMemory"]
+    $requestedCpu = $container["RequestedCpu"]
+    $alert = ''
+
+	if ([double]$usedMemory.TrimEnd("Mi") -gt [double]$requestedMemory)
+	{
+	  $alert = '*'
+	}
+	$podMemoryList += New-Object PSObject -Property @{
+      PodName = $podName
+      ContainerName = $containerName
+      RequestedMemory = "${requestedMemory}Mi"
+      UsedMemory = "${usedMemory}"
+      RequestedCpu = "${requestedCpu}"
+      UsedCpu = "${usedCpu}"
+	  IsExceedRequest = $alert
+    }
+  }
+}
+
+$podMemoryList | Format-Table -Property PodName, ContainerName, RequestedMemory, UsedMemory, RequestedCpu, UsedCpu, IsExceedRequest -AutoSize    
+
+}
+
+# 將輸入的記憶體使用量轉換為 MiB
+function ConvertToMiB {
+    param (
+        [Parameter(Mandatory=$true)]
+        [string]$memory
+    )
+
+    $unit = $memory[-2..-1] -join ''   # 取出最後兩個字符作為單位
+
+    switch ($unit) {
+        "Gi" { [math]::Round([double]$memory.TrimEnd("Gi") * 1024) }   # 如果單位是 Gi，則將其轉換為 Mi
+        "Mi" { [math]::Round([double]$memory.TrimEnd("Mi")) }   # 如果單位是 Mi，則直接返回
+        default { throw "Unknown memory unit: $unit" }
+    }
+}
 
 $env:myConfigRootPath = "D:\git\personal-config"
 $env:pwshConfigFileName = "Microsoft.PowerShell_profile.ps1"
@@ -432,4 +507,135 @@ function syncToLocal(){
 
 #install: Install-Module ZLocation -Scope CurrentUser 
 Import-Module ZLocation
+
+
+##########################
+# Project folder name
+$projectList = @(
+    "namipaymentaccountapi",
+    "namipromotionapi",
+    "namiuserinfoapi",
+    "shabondi",
+    "hectorgraphql",
+    "bartholomew",
+    "robin"
+)
+# Git Path
+$gitPath = "D:\git"
+class PathObject{
+    [string]$CsprojPath
+    [string]$JobName
+}
+$watcherData = @{}
+##########################
+function startFileWatcher {
+    param (
+        [Parameter(Mandatory=$true)]
+        [string]$FolderPath,
+        [Parameter(Mandatory=$true)]
+        [string]$JobName,
+        [Parameter(Mandatory=$true)]
+        [string]$ProjectName
+    )
+    $object = [PathObject]::new()
+    $object.CsprojPath = $FolderPath
+    $object.JobName = $JobName
+    $watcherData[$ProjectName] = $object
+    $watcher = New-Object System.IO.FileSystemWatcher
+    $watcher.Path = $FolderPath
+    $watcher.Filter = "*.cs"
+    $watcher.IncludeSubdirectories = $true
+    $watcher.EnableRaisingEvents = $true
+    $action = {
+        $path = $Event.SourceEventArgs.FullPath
+        $changeType = $Event.SourceEventArgs.ChangeType
+        $fileName = Split-Path -Path $path -Leaf
+        $ProjectName = ($path -split '\\')[2]
+        $JobName = $watcherData[$ProjectName].JobName
+        Remove-Job -Name $JobName -Force
+        Start-Job -Name $JobName {cd $args[0]; dotnet run} -ArgumentList $watcherData[$ProjectName].CsprojPath
+        Write-Host [$JobName] "::" $fileName "has been changed！" -ForegroundColor Yellow 
+    }
+    Register-ObjectEvent $watcher "Changed" -Action $action -SourceIdentifier "wt_$JobName"
+    Start-Job -Name $JobName {cd $args[0]; dotnet run} -ArgumentList $FolderPath
+}
+function nami {
+    # Delete Job
+    if($args[0] -eq "-d"){
+        $jobNames = (Get-Job | Where-Object { $_.State -eq "Running" -and $_.Name -notmatch "^wt_" }).Name
+        while ($true) {
+            Write-Host "Please select a Job:"
+            for ($i = 0; $i -lt $jobNames.Count; $i++) {
+                Write-Host ("[{0}] {1}" -f ($i + 1), $jobNames[$i])
+            }
+            $jobIndex = Read-Host "Please enter the job number:"
+            if ([int]::TryParse($jobIndex, [ref]$null)) {
+                $jobIndex = [int]$jobIndex - 1
+                if ($jobIndex -ge 0 -and $jobIndex -le $jobNames.Count) {
+                    $jobName = $jobNames[$jobIndex]
+                    Remove-Job -Name $jobName -Force
+                    Remove-Job -Name "wt_$jobName" -Force
+                    Get-Job
+                    break
+                }
+                else {
+                    Write-Host "Invalid selection: $jobIndex"
+                }
+            }
+            else {
+                Write-Host "Invalid selection: $jobIndex"
+            }
+        }
+    }
+    # Run All project for Nami
+    if($args[0] -eq "-all"){
+        $visitedDirectories = @()
+        $logMessages = @()
+        Get-ChildItem -Recurse -Path $gitPath -Directory | 
+        ForEach-Object {
+            $projectDirectory = $_.FullName
+            $projectName = $_.Name
+            if ($visitedDirectories -notcontains $projectDirectory -and $projectList -contains $projectName) {
+                $visitedDirectories += $projectDirectory
+                $csprojFiles = Get-ChildItem $projectDirectory -Recurse -Filter "*$projectName.csproj" -File -ErrorAction SilentlyContinue | 
+                            Where-Object { $_.Name -ilike "$projectName.csproj" }
+                if ($csprojFiles.Count -gt 0) {
+                    foreach ($csproj in $csprojFiles) {
+                        $projectPath = $csproj.DirectoryName
+                        $jobName = $csproj.Name.Replace(".csproj", "")
+                        $existingJobs = Get-Job -Name $jobName -ErrorAction SilentlyContinue
+                        if ($existingJobs.Count -eq 0) {
+                            if ($visitedDirectories -notcontains $projectPath) {
+                                $visitedDirectories += $projectPath
+                                if ($logMessages -notcontains "Starting $projectPath") {
+                                    $logMessages += "Starting $projectPath"
+                                }
+                                startFileWatcher -FolderPath $projectPath -JobName $jobName -ProjectName $projectName
+                            } 
+                        } 
+                        elseif ($existingJobs[0].State -eq "Running") {
+                            if ($logMessages -notcontains "Job $jobName is already running, skipping") {
+                                $logMessages += "Job $jobName is already running, skipping"
+                            }
+                        } 
+                        else {
+                            if ($logMessages -notcontains "Job $jobName already exists, skipping") {
+                                $watcherJobName = "wt_" + $existingJobs.Name
+                                Remove-Job -Job $existingJobs -Force
+                                Remove-Job -Name $watcherJobName -Force -ErrorAction SilentlyContinue
+                                startFileWatcher -FolderPath $projectPath -JobName $jobName -ProjectName $projectName
+                            }
+                        }
+                    }
+                } else {
+                    if ($logMessages -notcontains "No .csproj files found in $projectPath") {
+                        $logMessages += "No .csproj files found in $projectPath"
+                    }
+                }
+            }
+        }
+        $logMessages | ForEach-Object { Write-Output $_ }
+        Get-Job
+    }
+}
 
