@@ -20,7 +20,7 @@
           "style": "diamond",
           "powerline_symbol": "\ue0b0",
           "foreground": "#ffffff",
-          "background": "#ff476c",
+          "background": "#2f322f",
           "leading_diamond": "\ue0b6",
           "trailing_diamond": "\ue0b0",
           "template": " \ue5ff {{ .Path }} ",

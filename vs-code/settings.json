@@ -1,6 +1,5 @@
 {
-  "vim.leader": " ", //default leader key is whitespace
-  "window.zoomLevel": 2,
+  "vim.leader": " ",
   "vim.useCtrlKeys": true,
   "vim.handleKeys": {
     "<C-c>": false,
@@ -11,7 +10,6 @@
   },
   "vim.useSystemClipboard": false,
   "editor.lineNumbers": "relative",
-  "editor.formatOnSave": false,
   // "vim.autoSwitchInputMethod.enable": true,
   // "vim.autoSwitchInputMethod.defaultIM": "1033",
   // "vim.autoSwitchInputMethod.obtainIMCmd": "D:\\vscodevim\\im-select.exe",
@@ -176,5 +174,6 @@
   },
   "[vue]": {
     "editor.defaultFormatter": "Vue.volar"
-  }
+  },
+  "window.zoomLevel": 2
 }
