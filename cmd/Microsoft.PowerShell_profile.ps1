@@ -473,6 +473,7 @@ function ConvertToMiB {
     switch ($unit) {
         "Gi" { [math]::Round([double]$memory.TrimEnd("Gi") * 1024) }   # 如果單位是 Gi，則將其轉換為 Mi
         "Mi" { [math]::Round([double]$memory.TrimEnd("Mi")) }   # 如果單位是 Mi，則直接返回
+        "0m" { [math]::Round([double]$memory.TrimEnd("m")/1024/1024/1024) }   # 如果單位是 m -> bytes
         default { throw "Unknown memory unit: $unit" }
     }
 }
