@@ -362,7 +362,7 @@ function gosleep(){
 }
 
 function hostfile(){
-	sudo notepad C:\Windows\System32\drivers\etc\hosts
+	notepad C:\Windows\System32\drivers\etc\hosts
 }
 
 function gpts() {
@@ -396,10 +396,9 @@ function wk(){
     wsl kubectl $args
 }
 
-#function kns(){
-#    kubens $args
-    #kubectl config set-context --current --namespace=$args
-#}
+function port(){
+    netstat -ano | findstr $args
+}
 
 function krl(){
 # 獲取所有的 pods 的 JSON 描述
