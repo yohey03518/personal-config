@@ -397,7 +397,7 @@ function wk(){
 }
 
 function port(){
-    netstat -ano | findstr $args
+    netstat -ano | findstr ":$args"
 }
 
 function krl(){
