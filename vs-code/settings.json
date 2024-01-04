@@ -106,6 +106,10 @@
       "after": ["Z", "Q"]
     },
     {
+      "before": ["z", "c", "c"],
+      "after": ["c", "i", "\""]
+    },
+    {
       "before": ["Q", "Q"],
       "commands": [{ "command": "workbench.action.closeEditorInAllGroups" }]
     },
