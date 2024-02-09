@@ -430,16 +430,20 @@ foreach ($pod in $pods.items)
 $podsInfo = kubectl top pod --containers --no-headers
 
 # 解析出每個 pod 的每個 container 的 Used Memory
-foreach ($podInfo in $podsInfo)
+foreach ($pod_containerInfo in $podsInfo)
 {
-  $data = ($podInfo -replace '\s+', ' ')
+  $data = ($pod_containerInfo -replace '\s+', ' ')
   $podName = $data.Split(" ")[0]
+  $containerName = $data.Split(" ")[1]
   $usedMemory = $data.Split(" ")[3]
   $usedCpu = $data.Split(" ")[2]
 
   foreach ($container in $podContainers[$podName])
   {
-    $containerName = $container["Name"]
+    if ($containerName -ne $container["Name"])
+    {
+        continue
+    }
     $requestedMemory = $container["RequestedMemory"]
     $requestedCpu = $container["RequestedCpu"]
     $alert = ''
@@ -451,16 +455,15 @@ foreach ($podInfo in $podsInfo)
 	$podMemoryList += New-Object PSObject -Property @{
       PodName = $podName
       ContainerName = $containerName
-      RequestedMemory = "${requestedMemory}Mi"
-      UsedMemory = "${usedMemory}"
-      RequestedCpu = "${requestedCpu}"
+      Used_ReqMemory = "${usedMemory}/${requestedMemory}Mi"
+      Used_ReqCpu = "${usedCpu}/${requestedCpu}"
       UsedCpu = "${usedCpu}"
 	  IsExceedRequest = $alert
     }
   }
 }
 
-$podMemoryList | Format-Table -Property PodName, ContainerName, RequestedMemory, UsedMemory, RequestedCpu, UsedCpu, IsExceedRequest -AutoSize    
+$podMemoryList | Format-Table -Property PodName, ContainerName, Used_ReqMemory, Used_ReqCpu, IsExceedRequest -AutoSize    
 
 }
 
