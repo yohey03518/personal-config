@@ -1,4 +1,5 @@
 <keymap version="1" name="Visual Studio (Migrated)" parent="Visual Studio">
+  <action id="AIAssistant.Editor.CompleteCodeWithAI" />
   <action id="ActivateFindToolWindow">
     <keyboard-shortcut first-keystroke="alt 3" />
     <keyboard-shortcut first-keystroke="ctrl alt f12" />
@@ -47,6 +48,7 @@
   <action id="Console.TableResult.CloneRow" />
   <action id="Console.TableResult.ColumnSortAsc" />
   <action id="Console.TableResult.ColumnSortDesc" />
+  <action id="Console.TableResult.NextPage" />
   <action id="DatabaseView.CopyAction" />
   <action id="DatabaseView.ShowDiff" />
   <action id="Diff.ShowDiff" />
@@ -65,6 +67,10 @@
   <action id="EditorPreviousWordInDifferentHumpsMode">
     <keyboard-shortcut first-keystroke="ctrl open_bracket" />
     <keyboard-shortcut first-keystroke="ctrl left" />
+  </action>
+  <action id="EditorSelectWord">
+    <keyboard-shortcut first-keystroke="shift alt equals" />
+    <keyboard-shortcut first-keystroke="ctrl w" />
   </action>
   <action id="EditorToggleUseSoftWraps">
     <keyboard-shortcut first-keystroke="ctrl e" second-keystroke="w" />
@@ -89,6 +95,7 @@
     <keyboard-shortcut first-keystroke="ctrl r" second-keystroke="ctrl m" />
     <keyboard-shortcut first-keystroke="ctrl alt m" />
   </action>
+  <action id="FileStructurePopup" />
   <action id="FindUsages">
     <keyboard-shortcut first-keystroke="shift f12" />
     <keyboard-shortcut first-keystroke="alt f7" />
@@ -175,6 +182,7 @@
     <keyboard-shortcut first-keystroke="shift ctrl alt up" />
     <keyboard-shortcut first-keystroke="shift ctrl alt k" />
   </action>
+  <action id="NextOccurence" />
   <action id="NextTab" />
   <action id="PreviousTab">
     <keyboard-shortcut first-keystroke="alt left" />
@@ -245,6 +253,10 @@
     <keyboard-shortcut first-keystroke="ctrl e" second-keystroke="ctrl f" />
     <keyboard-shortcut first-keystroke="shift ctrl alt f" />
   </action>
+  <action id="SmartSelect">
+    <keyboard-shortcut first-keystroke="shift alt equals" />
+    <keyboard-shortcut first-keystroke="ctrl w" />
+  </action>
   <action id="SmartTypeCompletion">
     <keyboard-shortcut first-keystroke="ctrl alt space" />
     <keyboard-shortcut first-keystroke="shift ctrl space" />
@@ -286,4 +298,11 @@
   </action>
   <action id="XDebugger.MoveWatchDown" />
   <action id="XDebugger.MoveWatchUp" />
+  <action id="copilot.applyInlaysNextLine">
+    <keyboard-shortcut first-keystroke="ctrl alt down" />
+  </action>
+  <action id="copilot.applyInlaysNextWord">
+    <keyboard-shortcut first-keystroke="ctrl alt right" />
+  </action>
+  <action id="copilot.disposeInlays" />
 </keymap>
