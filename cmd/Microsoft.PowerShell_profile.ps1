@@ -348,9 +348,13 @@ function gca(){
 	git commit -a
 }
 
+
 Set-Alias k kubectl
 Set-Alias kx kubectx
 Set-Alias kns kubens
+function kgp(){
+	k get po $args
+}
 
 function vs(){
 	./*.sln
