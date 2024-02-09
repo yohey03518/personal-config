@@ -489,12 +489,15 @@ $env:vsCodeKeyBindingFileName = "keybindings.json"
 $env:vsCodeSettingFileName = "settings.json"
 $env:riderKeyMapPath = "$env:APPDATA\JetBrains\Rider2023.3\keymaps"
 $env:riderKeyMapFileName = "Visual Studio _Migrated_.xml"
+$env:webStormKeyMapPath = "$env:APPDATA\JetBrains\WebStorm2023.3\keymaps"
+$env:webStormKeyMapFileName = "Windows copy.xml"
 $env:gitConfigFileName = ".gitconfig"
 function syncFromLocal(){
     Copy-Item $env:pwshPath\$env:pwshConfigFileName $env:myConfigRootPath\cmd\$env:pwshConfigFileName
     Copy-Item $env:vsCodePath\$env:vsCodeKeyBindingFileName $env:myConfigRootPath\vs-code\$env:vsCodeKeyBindingFileName
     Copy-Item $env:vsCodePath\$env:vsCodeSettingFileName $env:myConfigRootPath\vs-code\$env:vsCodeSettingFileName
     Copy-Item $env:riderKeyMapPath\$env:riderKeyMapFileName $env:myConfigRootPath\rider\$env:riderKeyMapFileName
+    Copy-Item $env:webStormKeyMapPath\$env:webStormKeyMapFileName $env:myConfigRootPath\webStorm\$env:webStormKeyMapFileName
     Copy-Item $env:USERPROFILE\$env:gitConfigFileName $env:myConfigRootPath\git\$env:gitConfigFileName
 }
 
@@ -503,6 +506,7 @@ function syncToLocal(){
     Copy-Item $env:myConfigRootPath\vs-code\$env:vsCodeKeyBindingFileName $env:vsCodePath\$env:vsCodeKeyBindingFileName
     Copy-Item $env:myConfigRootPath\vs-code\$env:vsCodeSettingFileName $env:vsCodePath\$env:vsCodeSettingFileName
     Copy-Item $env:myConfigRootPath\rider\$env:riderKeyMapFileName $env:riderKeyMapPath\$env:riderKeyMapFileName 
+    Copy-Item $env:myConfigRootPath\webStorm\$env:webStormKeyMapFileName $env:webStormKeyMapPath\$env:webStormKeyMapFileName 
     Copy-Item $env:myConfigRootPath\git\$env:gitConfigFileName $env:USERPROFILE\$env:gitConfigFileName 
 }
 
