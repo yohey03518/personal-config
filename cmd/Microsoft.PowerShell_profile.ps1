@@ -487,7 +487,7 @@ $env:pwshPath = "$env:USERPROFILE\Documents\Powershell"
 $env:vsCodePath = "$env:APPDATA\Code\User"
 $env:vsCodeKeyBindingFileName = "keybindings.json"
 $env:vsCodeSettingFileName = "settings.json"
-$env:riderKeyMapPath = "$env:APPDATA\JetBrains\Rider2022.2\keymaps"
+$env:riderKeyMapPath = "$env:APPDATA\JetBrains\Rider2023.3\keymaps"
 $env:riderKeyMapFileName = "Visual Studio _Migrated_.xml"
 $env:gitConfigFileName = ".gitconfig"
 function syncFromLocal(){
