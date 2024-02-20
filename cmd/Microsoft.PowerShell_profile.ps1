@@ -422,8 +422,10 @@ foreach ($pod in $pods.items)
   {
     $containerName = $container.name
 	$requestedMemory = ConvertToMiB $container.resources.requests.memory
+	$limitMemory = ConvertToMiB $container.resources.limits.memory
 	$requestedCpu = $container.resources.requests.cpu
-    $podContainers[$podName] += @{ "Name" = $containerName; "RequestedMemory" = $requestedMemory; "RequestedCpu" = $requestedCpu }
+	$limitCpu = $container.resources.limits.cpu
+    $podContainers[$podName] += @{ "Name" = $containerName; "RequestedMemory" = $requestedMemory; "LimitMemory" = $limitMemory; "RequestedCpu" = $requestedCpu; "LimitCpu" = $limitCpu }
   }
 }
 
@@ -445,7 +447,9 @@ foreach ($pod_containerInfo in $podsInfo)
         continue
     }
     $requestedMemory = $container["RequestedMemory"]
+    $limitMemory = $container["LimitMemory"]
     $requestedCpu = $container["RequestedCpu"]
+    $limitCpu = $container["LimitCpu"]
     $alert = ''
 
 	if ([double]$usedMemory.TrimEnd("Mi") -gt [double]$requestedMemory)
@@ -453,17 +457,16 @@ foreach ($pod_containerInfo in $podsInfo)
 	  $alert = '*'
 	}
 	$podMemoryList += New-Object PSObject -Property @{
-      PodName = $podName
-      ContainerName = $containerName
-      Used_ReqMemory = "${usedMemory}/${requestedMemory}Mi"
-      Used_ReqCpu = "${usedCpu}/${requestedCpu}"
+      Pod_Container = "${podName} (${containerName})"
+      Mem_Used_Req_Limit = "${usedMemory}/${requestedMemory}Mi/${limitMemory}Mi"
+      Cpu_Used_Req_Limit = "${usedCpu}/${requestedCpu}/${limitCpu}"
       UsedCpu = "${usedCpu}"
-	  IsExceedRequest = $alert
+	  MemExceedRequest = $alert
     }
   }
 }
 
-$podMemoryList | Format-Table -Property PodName, ContainerName, Used_ReqMemory, Used_ReqCpu, IsExceedRequest -AutoSize    
+$podMemoryList | Format-Table -Property Pod_Container, Mem_Used_Req_Limit, Cpu_Used_Req_Limit, MemExceedRequest -AutoSize    
 
 }
 
