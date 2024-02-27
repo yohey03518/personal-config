@@ -356,6 +356,10 @@ function kgp(){
 	k get po $args
 }
 
+function env(){
+    Get-ChildItem Env: | Sort-Object Name
+}
+
 function vs(){
 	./*.sln
 }
