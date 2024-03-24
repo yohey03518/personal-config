@@ -409,72 +409,67 @@ function port(){
 }
 
 function krl(){
-# 獲取所有的 pods 的 JSON 描述
-$pods = kubectl get pods -o json | ConvertFrom-Json
+    $pods = kubectl get pods -o json | ConvertFrom-Json
 
-# 建立一個 hashtable 來存儲每個 pod 下的 containers
-$podContainers = @{}
-$podMemoryList = @()
+    $podContainers = @{}
+    $podMemoryList = @()
 
-foreach ($pod in $pods.items)
-{
-  $podName = $pod.metadata.name
-  $podContainers[$podName] = @()
-
-  # 從 pod 的 JSON 描述中取得每個 container 的名稱和 Requested Memory
-  foreach ($container in $pod.spec.containers)
-  {
-    $containerName = $container.name
-	$requestedMemory = ConvertToMiB $container.resources.requests.memory
-	$limitMemory = ConvertToMiB $container.resources.limits.memory
-	$requestedCpu = $container.resources.requests.cpu
-	$limitCpu = $container.resources.limits.cpu
-    $podContainers[$podName] += @{ "Name" = $containerName; "RequestedMemory" = $requestedMemory; "LimitMemory" = $limitMemory; "RequestedCpu" = $requestedCpu; "LimitCpu" = $limitCpu }
-  }
-}
-
-$podsInfo = kubectl top pod --containers --no-headers
-
-# 解析出每個 pod 的每個 container 的 Used Memory
-foreach ($pod_containerInfo in $podsInfo)
-{
-  $data = ($pod_containerInfo -replace '\s+', ' ')
-  $podName = $data.Split(" ")[0]
-  $containerName = $data.Split(" ")[1]
-  $usedMemory = $data.Split(" ")[3]
-  $usedCpu = $data.Split(" ")[2]
-
-  foreach ($container in $podContainers[$podName])
-  {
-    if ($containerName -ne $container["Name"])
+    foreach ($pod in $pods.items)
     {
-        continue
-    }
-    $requestedMemory = $container["RequestedMemory"]
-    $limitMemory = $container["LimitMemory"]
-    $requestedCpu = $container["RequestedCpu"]
-    $limitCpu = $container["LimitCpu"]
-    $alert = ''
+        $podName = $pod.metadata.name
+        $podContainers[$podName] = @()
 
-	if ([double]$usedMemory.TrimEnd("Mi") -gt [double]$requestedMemory)
-	{
-	  $alert = '*'
-	}
-	$podMemoryList += New-Object PSObject -Property @{
-      Pod_Container = "${podName} (${containerName})"
-      Mem_Used_Req_Limit = "${usedMemory}/${requestedMemory}Mi/${limitMemory}Mi"
-      Cpu_Used_Req_Limit = "${usedCpu}/${requestedCpu}/${limitCpu}"
-      UsedCpu = "${usedCpu}"
-	  MemExceedRequest = $alert
+        foreach ($container in $pod.spec.containers)
+        {
+            $containerName = $container.name
+            $requestedMemory = ConvertToMiB $container.resources.requests.memory
+            $limitMemory = ConvertToMiB $container.resources.limits.memory
+            $requestedCpu = $container.resources.requests.cpu
+            $limitCpu = $container.resources.limits.cpu
+            $podContainers[$podName] += @{ "Name" = $containerName; "RequestedMemory" = $requestedMemory; "LimitMemory" = $limitMemory; "RequestedCpu" = $requestedCpu; "LimitCpu" = $limitCpu }
+        }
     }
-  }
+
+    $podsInfo = kubectl top pod --containers --no-headers
+
+    foreach ($pod_containerInfo in $podsInfo)
+    {
+        $data = ($pod_containerInfo -replace '\s+', ' ')
+        $podName = $data.Split(" ")[0]
+        $containerName = $data.Split(" ")[1]
+        $usedMemory = $data.Split(" ")[3]
+        $usedCpu = $data.Split(" ")[2]
+
+        foreach ($container in $podContainers[$podName])
+        {
+            if ($containerName -ne $container["Name"])
+            {
+                continue
+            }
+            $requestedMemory = $container["RequestedMemory"]
+            $limitMemory = $container["LimitMemory"]
+            $requestedCpu = $container["RequestedCpu"]
+            $limitCpu = $container["LimitCpu"]
+            $alert = ''
+
+            if ([double]$usedMemory.TrimEnd("Mi") -gt [double]$requestedMemory)
+            {
+                $alert = '*'
+            }
+            $podMemoryList += New-Object PSObject -Property @{
+                Pod_Container = "${podName} (${containerName})"
+                Mem_Used_Req_Limit = "${usedMemory}/${requestedMemory}Mi/${limitMemory}Mi"
+                Cpu_Used_Req_Limit = "${usedCpu}/${requestedCpu}/${limitCpu}"
+                UsedCpu = "${usedCpu}"
+                MemExceedRequest = $alert
+            }
+        }
+    }
+
+    $podMemoryList | Format-Table -Property Pod_Container, Mem_Used_Req_Limit, Cpu_Used_Req_Limit, MemExceedRequest -AutoSize    
+
 }
 
-$podMemoryList | Format-Table -Property Pod_Container, Mem_Used_Req_Limit, Cpu_Used_Req_Limit, MemExceedRequest -AutoSize    
-
-}
-
-# 將輸入的記憶體使用量轉換為 MiB
 function ConvertToMiB {
     param (
         [Parameter(Mandatory=$true)]
@@ -487,7 +482,7 @@ function ConvertToMiB {
         "Gi" { [math]::Round([double]$memory.TrimEnd("Gi") * 1024) }   # 如果單位是 Gi，則將其轉換為 Mi
         "Mi" { [math]::Round([double]$memory.TrimEnd("Mi")) }   # 如果單位是 Mi，則直接返回
         "0m" { [math]::Round([double]$memory.TrimEnd("m")/1024/1024/1024) }   # 如果單位是 m -> bytes
-        default { throw "Unknown memory unit: $unit" }
+        default { "0" }
     }
 }
 

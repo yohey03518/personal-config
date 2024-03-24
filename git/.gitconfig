@@ -28,3 +28,5 @@
     st = status
     ct = "!f() { git checkout --track origin/\"$1\"; }; f"
     cp = cherry-pick
+[credential "http://git.coreop.net"]
+	provider = generic

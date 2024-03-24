@@ -48,6 +48,8 @@
   <action id="Forward">
     <mouse-shortcut keystroke="button5" />
   </action>
+  <action id="Generate.Missing.Members.ES6" />
+  <action id="Generate.Missing.Members.TypeScript" />
   <action id="Git.Commit.Stage" />
   <action id="Git.Rename.Local.Branch">
     <keyboard-shortcut first-keystroke="shift f6" />
@@ -66,6 +68,7 @@
   <action id="Images.Editor.ZoomOut">
     <keyboard-shortcut first-keystroke="ctrl subtract" />
   </action>
+  <action id="ImplementMethods" />
   <action id="JumpToLastWindow" />
   <action id="MainMenuButton.ShowMenu" />
   <action id="MethodDown" />
@@ -108,6 +111,7 @@
   <action id="Tree-startEditing" />
   <action id="TypeHierarchy" />
   <action id="TypeHierarchyBase.BaseOnThisType" />
+  <action id="UsageFiltering.Imports" />
   <action id="UsageView.ShowRecentFindUsages" />
   <action id="Vcs.UpdateProject" />
   <action id="XDebugger.SetValue" />
@@ -117,6 +121,9 @@
   <action id="copilot.applyInlaysNextWord">
     <keyboard-shortcut first-keystroke="ctrl alt right" />
   </action>
+  <action id="copilot.chat.show">
+    <keyboard-shortcut first-keystroke="ctrl i" />
+  </action>
   <action id="copilot.cycleNextInlays">
     <keyboard-shortcut first-keystroke="alt close_bracket" />
   </action>
@@ -124,4 +131,5 @@
     <keyboard-shortcut first-keystroke="alt open_bracket" />
   </action>
   <action id="copilot.disposeInlays" />
+  <action id="org.intellij.plugins.markdown.ui.actions.styling.ToggleItalicAction" />
 </keymap>

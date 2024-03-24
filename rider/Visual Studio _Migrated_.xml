@@ -132,6 +132,7 @@
     <keyboard-shortcut first-keystroke="shift ctrl f12" />
     <keyboard-shortcut first-keystroke="shift escape" />
   </action>
+  <action id="IncrementalSearch" />
   <action id="Inline">
     <keyboard-shortcut first-keystroke="ctrl r" second-keystroke="i" />
     <keyboard-shortcut first-keystroke="ctrl r" second-keystroke="ctrl i" />
@@ -190,6 +191,10 @@
   </action>
   <action id="Print" />
   <action id="ReSharperGotoContainingDeclaration" />
+  <action id="ReSharperGotoNextErrorInSolution">
+    <keyboard-shortcut first-keystroke="shift alt page_down" />
+    <keyboard-shortcut first-keystroke="f8" />
+  </action>
   <action id="ReSharperSelectContainingDeclaration">
     <keyboard-shortcut first-keystroke="shift ctrl open_bracket" />
   </action>
@@ -216,6 +221,7 @@
     <keyboard-shortcut first-keystroke="ctrl k" second-keystroke="ctrl i" />
     <keyboard-shortcut first-keystroke="shift ctrl f1" />
   </action>
+  <action id="RiderNuGetToggleInfoExpanderAction" />
   <action id="RiderUnitTestDebugContextAction">
     <keyboard-shortcut first-keystroke="ctrl r" second-keystroke="ctrl a" />
   </action>
@@ -283,6 +289,7 @@
     <keyboard-shortcut first-keystroke="ctrl e" second-keystroke="ctrl t" />
     <keyboard-shortcut first-keystroke="shift ctrl e" />
   </action>
+  <action id="UsageFiltering.Imports" />
   <action id="UsageFiltering.ReadAccess" />
   <action id="UsageView.ShowRecentFindUsages" />
   <action id="Vcs.Log.ShowTooltip">
@@ -304,5 +311,10 @@
   <action id="copilot.applyInlaysNextWord">
     <keyboard-shortcut first-keystroke="ctrl alt right" />
   </action>
+  <action id="copilot.chat.show">
+    <keyboard-shortcut first-keystroke="shift ctrl c" />
+    <keyboard-shortcut first-keystroke="ctrl i" />
+  </action>
   <action id="copilot.disposeInlays" />
+  <action id="org.intellij.plugins.markdown.ui.actions.styling.ToggleItalicAction" />
 </keymap>
