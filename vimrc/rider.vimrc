@@ -25,8 +25,8 @@ nmap zrt :action RiderUnitTestRunContextAction<CR>
 nmap zrT ?[TestFixture<CR>k:action RiderUnitTestRunContextAction<CR>
 "nmap zrT ?class<CR>w:action RiderUnitTestRunContextAction<CR>:action Back<CR>
 "imap <F1> <Esc>jy?[T<CR>P/public<CR>f(b:action ReformatCode<CR>
-imap <F1> <Esc>?[Te<CR>Vjj%yjj%p<Esc>:action ReformatCode<CR>
-nmap <F1> ?[Te<CR>Vjj%yjj%p<Esc>:action ReformatCode<CR>
+imap <F1> <Esc>?\[Te<CR>Vjj%yjj%p<Esc>:action ReformatCode<CR>
+nmap <F1> ?\[Te<CR>Vjj%yjj%p<Esc>:action ReformatCode<CR>
 nmap zrs dd?class<CR>jo[SetUp]<CR>public<Space>void<Space>SetUp(){<CR>}<Esc>P:action SilentCodeCleanup<CR>
 nmap zrx dd?public void Set<CR>j%Pzkzkzz
 "無法複合指令!

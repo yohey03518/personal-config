@@ -27,3 +27,19 @@ return
 !2::
 WinActivate ,ahk_exe 1Password.exe
 return
+
+f7::
+clicktoggle := !clicktoggle
+
+if (!clicktoggle)
+{ SetTimer, startclick, off
+  tooltip
+  return
+}
+
+startclick:
+tooltip, auto-clicking is on
+SendRaw z
+SetTimer, startclick, -300
+
+return

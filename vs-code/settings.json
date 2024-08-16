@@ -179,5 +179,6 @@
   "[vue]": {
     "editor.defaultFormatter": "Vue.volar"
   },
-  "window.zoomLevel": 2
+  "window.zoomLevel": 2,
+  "github.copilot.editor.enableAutoCompletions": true
 }

@@ -30,3 +30,5 @@
     cp = cherry-pick
 [credential "http://git.coreop.net"]
 	provider = generic
+[safe]
+	directory = D:/git/CacheService.SDK

@@ -42,6 +42,12 @@
     <keyboard-shortcut first-keystroke="alt enter" />
   </action>
   <action id="Console.TableResult.NextPage" />
+  <action id="EditorCloneCaretAbove">
+    <keyboard-shortcut first-keystroke="shift ctrl alt up" />
+  </action>
+  <action id="EditorCloneCaretBelow">
+    <keyboard-shortcut first-keystroke="shift ctrl alt down" />
+  </action>
   <action id="ExternalSystem.CollapseAll">
     <keyboard-shortcut first-keystroke="ctrl subtract" />
   </action>
@@ -65,6 +71,11 @@
     <keyboard-shortcut first-keystroke="f12" />
   </action>
   <action id="GotoNextError" />
+  <action id="HideActiveWindow" />
+  <action id="HideAllWindows">
+    <keyboard-shortcut first-keystroke="shift ctrl f12" />
+    <keyboard-shortcut first-keystroke="shift escape" />
+  </action>
   <action id="Images.Editor.ZoomOut">
     <keyboard-shortcut first-keystroke="ctrl subtract" />
   </action>
@@ -96,6 +107,8 @@
   <action id="Replace">
     <keyboard-shortcut first-keystroke="ctrl h" />
   </action>
+  <action id="ResizeToolWindowDown" />
+  <action id="ResizeToolWindowUp" />
   <action id="SearchEverywhere">
     <keyboard-shortcut first-keystroke="ctrl t" />
   </action>
@@ -114,6 +127,8 @@
   <action id="UsageFiltering.Imports" />
   <action id="UsageView.ShowRecentFindUsages" />
   <action id="Vcs.UpdateProject" />
+  <action id="VcsShowNextChangeMarker" />
+  <action id="VcsShowPrevChangeMarker" />
   <action id="XDebugger.SetValue" />
   <action id="copilot.applyInlaysNextLine">
     <keyboard-shortcut first-keystroke="ctrl alt down" />
