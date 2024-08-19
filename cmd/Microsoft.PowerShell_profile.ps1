@@ -405,7 +405,12 @@ function wk(){
 }
 
 function port(){
-    netstat -ano | findstr ":$args"
+    $portResult = netstat -ano | findstr ":$args"
+    Write-Output $portResult
+    if ($null -eq $portResult) {
+        Write-Output "Port $args is not in use. Please check OS preserved ports."
+        netsh interface ipv4 show excludedportrange protocol=tcp
+    }
 }
 
 function krl(){
