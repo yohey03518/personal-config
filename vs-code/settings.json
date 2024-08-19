@@ -124,10 +124,6 @@
       "after": ["<Esc>", "z", ";"]
     },
     {
-      "before": ["j", "j"],
-      "after": ["<Esc>"]
-    },
-    {
       "before": ["z", "s", "a"],
       "after": ["<Esc>", "g", "g", "v", "G", "$"]
     },
