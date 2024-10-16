@@ -499,7 +499,7 @@ $env:vsCodeKeyBindingFileName = "keybindings.json"
 $env:vsCodeSettingFileName = "settings.json"
 $env:riderKeyMapPath = "$env:APPDATA\JetBrains\Rider2024.1\keymaps"
 $env:riderKeyMapFileName = "Visual Studio _Migrated_.xml"
-$env:webStormKeyMapPath = "$env:APPDATA\JetBrains\WebStorm2023.3\keymaps"
+$env:webStormKeyMapPath = "$env:APPDATA\JetBrains\WebStorm2024.2\keymaps"
 $env:webStormKeyMapFileName = "Windows copy.xml"
 $env:gitConfigFileName = ".gitconfig"
 function syncFromLocal(){
