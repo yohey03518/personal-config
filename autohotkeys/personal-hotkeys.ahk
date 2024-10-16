@@ -21,6 +21,7 @@ SendRaw zxcv1234
 return
 
 !1::
+WinActivate erwin@TI03BY332
 WinActivate PowerShell
 return
 

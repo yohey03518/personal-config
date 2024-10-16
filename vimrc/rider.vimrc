@@ -37,6 +37,8 @@ nmap zra :action RiderUnitTestRunCurrentSessionAction<CR>
 nmap ,m :action FileStructurePopup<CR>
 nmap zn :action GotoPreviousError<CR>
 imap zn <Esc>:action GotoPreviousError<CR>
+nmap zN :action GotoNextError<CR>
+imap zN <Esc>:action GotoNextError<CR>
 "zN 找不到 ReSharper_GotoPrevHighlight
 "如何關閉選單 類似alt alt
 nmap qq ZQ
