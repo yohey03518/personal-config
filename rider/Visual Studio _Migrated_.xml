@@ -26,6 +26,8 @@
     <keyboard-shortcut first-keystroke="shift alt space" />
     <keyboard-shortcut first-keystroke="ctrl alt space" />
   </action>
+  <action id="CloneCaretAboveWithVirtualSpace" />
+  <action id="CloneCaretBelowWithVirtualSpace" />
   <action id="CloseAllEditorsButActive">
     <keyboard-shortcut first-keystroke="ctrl q" second-keystroke="ctrl q" />
   </action>
@@ -52,6 +54,18 @@
   <action id="DatabaseView.CopyAction" />
   <action id="DatabaseView.ShowDiff" />
   <action id="Diff.ShowDiff" />
+  <action id="EditorAddOrRemoveCaret">
+    <mouse-shortcut keystroke="alt button1" />
+  </action>
+  <action id="EditorCloneCaretAbove">
+    <keyboard-shortcut first-keystroke="shift alt up" />
+  </action>
+  <action id="EditorCloneCaretBelow">
+    <keyboard-shortcut first-keystroke="shift alt down" />
+  </action>
+  <action id="EditorCreateRectangularSelectionOnMouseDrag">
+    <mouse-shortcut keystroke="shift alt button1" />
+  </action>
   <action id="EditorDeleteLine">
     <keyboard-shortcut first-keystroke="ctrl l" />
     <keyboard-shortcut first-keystroke="shift ctrl l" />
@@ -176,20 +190,27 @@
     <keyboard-shortcut first-keystroke="alt up" />
   </action>
   <action id="MoveStatementDown">
-    <keyboard-shortcut first-keystroke="shift ctrl alt down" />
     <keyboard-shortcut first-keystroke="shift ctrl alt j" />
+    <keyboard-shortcut first-keystroke="shift ctrl alt down" />
   </action>
   <action id="MoveStatementUp">
-    <keyboard-shortcut first-keystroke="shift ctrl alt up" />
     <keyboard-shortcut first-keystroke="shift ctrl alt k" />
+    <keyboard-shortcut first-keystroke="shift ctrl alt up" />
   </action>
   <action id="NextOccurence" />
   <action id="NextTab" />
+  <action id="OpenInlineChatAction">
+    <keyboard-shortcut first-keystroke="shift ctrl g" />
+    <keyboard-shortcut first-keystroke="ctrl i" />
+  </action>
   <action id="PreviousTab">
     <keyboard-shortcut first-keystroke="alt left" />
     <keyboard-shortcut first-keystroke="ctrl page_up" />
   </action>
   <action id="Print" />
+  <action id="QuickEvaluateExpression">
+    <keyboard-shortcut first-keystroke="ctrl alt f8" />
+  </action>
   <action id="ReSharperGotoContainingDeclaration" />
   <action id="ReSharperGotoNextErrorInSolution">
     <keyboard-shortcut first-keystroke="shift alt page_down" />
@@ -216,6 +237,8 @@
     <keyboard-shortcut first-keystroke="shift f6" />
     <keyboard-shortcut first-keystroke="f2" />
   </action>
+  <action id="ResizeToolWindowDown" />
+  <action id="ResizeToolWindowUp" />
   <action id="RiderNuGetQuickDocAction">
     <keyboard-shortcut first-keystroke="ctrl k" second-keystroke="i" />
     <keyboard-shortcut first-keystroke="ctrl k" second-keystroke="ctrl i" />
@@ -310,10 +333,6 @@
   </action>
   <action id="copilot.applyInlaysNextWord">
     <keyboard-shortcut first-keystroke="ctrl alt right" />
-  </action>
-  <action id="copilot.chat.show">
-    <keyboard-shortcut first-keystroke="shift ctrl c" />
-    <keyboard-shortcut first-keystroke="ctrl i" />
   </action>
   <action id="copilot.disposeInlays" />
   <action id="org.intellij.plugins.markdown.ui.actions.styling.ToggleItalicAction" />
