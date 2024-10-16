@@ -93,6 +93,9 @@
     <keyboard-shortcut first-keystroke="alt up" />
   </action>
   <action id="NextOccurence" />
+  <action id="OpenInlineChatAction">
+    <keyboard-shortcut first-keystroke="ctrl i" />
+  </action>
   <action id="RecentFiles">
     <keyboard-shortcut first-keystroke="ctrl tab" />
   </action>
@@ -136,9 +139,7 @@
   <action id="copilot.applyInlaysNextWord">
     <keyboard-shortcut first-keystroke="ctrl alt right" />
   </action>
-  <action id="copilot.chat.show">
-    <keyboard-shortcut first-keystroke="ctrl i" />
-  </action>
+  <action id="copilot.chat.show" />
   <action id="copilot.cycleNextInlays">
     <keyboard-shortcut first-keystroke="alt close_bracket" />
   </action>
