@@ -497,6 +497,7 @@ $env:myConfigRootPath = "D:\git\personal-config"
 $env:pwshConfigFileName = "Microsoft.PowerShell_profile.ps1"
 $env:pwshPath = "$env:USERPROFILE\Documents\Powershell"
 $env:vsCodePath = "$env:APPDATA\Code\User"
+$env:cursorPath = "$env:APPDATA\Cursor\User"
 $env:vsCodeKeyBindingFileName = "keybindings.json"
 $env:vsCodeSettingFileName = "settings.json"
 $env:riderKeyMapPath = "$env:APPDATA\JetBrains\Rider2024.1\keymaps"
@@ -508,6 +509,8 @@ function syncFromLocal(){
     Copy-Item $env:pwshPath\$env:pwshConfigFileName $env:myConfigRootPath\cmd\$env:pwshConfigFileName
     Copy-Item $env:vsCodePath\$env:vsCodeKeyBindingFileName $env:myConfigRootPath\vs-code\$env:vsCodeKeyBindingFileName
     Copy-Item $env:vsCodePath\$env:vsCodeSettingFileName $env:myConfigRootPath\vs-code\$env:vsCodeSettingFileName
+    Copy-Item $env:cursorPath\$env:vsCodeKeyBindingFileName $env:myConfigRootPath\cursor\$env:vsCodeKeyBindingFileName
+    Copy-Item $env:cursorPath\$env:vsCodeSettingFileName $env:myConfigRootPath\cursor\$env:vsCodeSettingFileName
     Copy-Item $env:riderKeyMapPath\$env:riderKeyMapFileName $env:myConfigRootPath\rider\$env:riderKeyMapFileName
     Copy-Item $env:webStormKeyMapPath\$env:webStormKeyMapFileName $env:myConfigRootPath\webStorm\$env:webStormKeyMapFileName
     Copy-Item $env:USERPROFILE\$env:gitConfigFileName $env:myConfigRootPath\git\$env:gitConfigFileName
@@ -517,6 +520,8 @@ function syncToLocal(){
     Copy-Item $env:myConfigRootPath\cmd\$env:pwshConfigFileName $env:pwshPath\$env:pwshConfigFileName
     Copy-Item $env:myConfigRootPath\vs-code\$env:vsCodeKeyBindingFileName $env:vsCodePath\$env:vsCodeKeyBindingFileName
     Copy-Item $env:myConfigRootPath\vs-code\$env:vsCodeSettingFileName $env:vsCodePath\$env:vsCodeSettingFileName
+    Copy-Item $env:myConfigRootPath\cursor\$env:vsCodeKeyBindingFileName $env:cursorPath\$env:vsCodeKeyBindingFileName
+    Copy-Item $env:myConfigRootPath\cursor\$env:vsCodeSettingFileName $env:cursorPath\$env:vsCodeSettingFileName
     Copy-Item $env:myConfigRootPath\rider\$env:riderKeyMapFileName $env:riderKeyMapPath\$env:riderKeyMapFileName 
     Copy-Item $env:myConfigRootPath\webStorm\$env:webStormKeyMapFileName $env:webStormKeyMapPath\$env:webStormKeyMapFileName 
     Copy-Item $env:myConfigRootPath\git\$env:gitConfigFileName $env:USERPROFILE\$env:gitConfigFileName 
