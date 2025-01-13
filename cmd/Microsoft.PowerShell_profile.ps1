@@ -351,7 +351,7 @@ function gca(){
 
 Set-Alias d docker
 Set-Alias dc docker-compose
-Set-Alias k kubectl
+Set-Alias k kubecolor
 Set-Alias kx kubectx
 Set-Alias kns kubens
 function kgp(){
