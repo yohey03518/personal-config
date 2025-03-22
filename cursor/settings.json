@@ -385,7 +385,6 @@
     },
     "editor.tabSize": 2,
     "security.workspace.trust.untrustedFiles": "open",
-    "emeraldwalk.runonsave": {},
     "[scss]": {
         "editor.defaultFormatter": "vscode.css-language-features"
     },
@@ -393,5 +392,10 @@
         "editor.defaultFormatter": "Vue.volar"
     },
     "window.zoomLevel": 2,
-    "github.copilot.editor.enableAutoCompletions": true
+    "github.copilot.editor.enableAutoCompletions": true,
+    "editor.codeActionsOnSave": {
+
+    },
+    "editor.fontSize": 12,
+    "files.autoSave": "afterDelay",
 }
