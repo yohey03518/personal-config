@@ -500,15 +500,15 @@ $env:vsCodePath = "$env:APPDATA\Code\User"
 $env:cursorPath = "$env:APPDATA\Cursor\User"
 $env:vsCodeKeyBindingFileName = "keybindings.json"
 $env:vsCodeSettingFileName = "settings.json"
-$env:riderKeyMapPath = "$env:APPDATA\JetBrains\Rider2024.1\keymaps"
-$env:riderKeyMapFileName = "Visual Studio _Migrated_.xml"
-$env:webStormKeyMapPath = "$env:APPDATA\JetBrains\WebStorm2024.2\keymaps"
+$env:riderKeyMapPath = "$env:APPDATA\JetBrains\Rider2024.3\keymaps"
+$env:riderKeyMapFileName = "Visual Studio 2022 copy.xml"
+$env:webStormKeyMapPath = "$env:APPDATA\JetBrains\WebStorm2024.3\keymaps"
 $env:webStormKeyMapFileName = "Windows copy.xml"
 $env:gitConfigFileName = ".gitconfig"
 function syncFromLocal(){
     Copy-Item $env:pwshPath\$env:pwshConfigFileName $env:myConfigRootPath\cmd\$env:pwshConfigFileName
-    Copy-Item $env:vsCodePath\$env:vsCodeKeyBindingFileName $env:myConfigRootPath\vs-code\$env:vsCodeKeyBindingFileName
-    Copy-Item $env:vsCodePath\$env:vsCodeSettingFileName $env:myConfigRootPath\vs-code\$env:vsCodeSettingFileName
+    # Copy-Item $env:vsCodePath\$env:vsCodeKeyBindingFileName $env:myConfigRootPath\vs-code\$env:vsCodeKeyBindingFileName
+    # Copy-Item $env:vsCodePath\$env:vsCodeSettingFileName $env:myConfigRootPath\vs-code\$env:vsCodeSettingFileName
     Copy-Item $env:cursorPath\$env:vsCodeKeyBindingFileName $env:myConfigRootPath\cursor\$env:vsCodeKeyBindingFileName
     Copy-Item $env:cursorPath\$env:vsCodeSettingFileName $env:myConfigRootPath\cursor\$env:vsCodeSettingFileName
     Copy-Item $env:riderKeyMapPath\$env:riderKeyMapFileName $env:myConfigRootPath\rider\$env:riderKeyMapFileName
@@ -518,8 +518,8 @@ function syncFromLocal(){
 
 function syncToLocal(){
     Copy-Item $env:myConfigRootPath\cmd\$env:pwshConfigFileName $env:pwshPath\$env:pwshConfigFileName
-    Copy-Item $env:myConfigRootPath\vs-code\$env:vsCodeKeyBindingFileName $env:vsCodePath\$env:vsCodeKeyBindingFileName
-    Copy-Item $env:myConfigRootPath\vs-code\$env:vsCodeSettingFileName $env:vsCodePath\$env:vsCodeSettingFileName
+    # Copy-Item $env:myConfigRootPath\vs-code\$env:vsCodeKeyBindingFileName $env:vsCodePath\$env:vsCodeKeyBindingFileName
+    # Copy-Item $env:myConfigRootPath\vs-code\$env:vsCodeSettingFileName $env:vsCodePath\$env:vsCodeSettingFileName
     Copy-Item $env:myConfigRootPath\cursor\$env:vsCodeKeyBindingFileName $env:cursorPath\$env:vsCodeKeyBindingFileName
     Copy-Item $env:myConfigRootPath\cursor\$env:vsCodeSettingFileName $env:cursorPath\$env:vsCodeSettingFileName
     Copy-Item $env:myConfigRootPath\rider\$env:riderKeyMapFileName $env:riderKeyMapPath\$env:riderKeyMapFileName 

@@ -1,93 +1,93 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
-  "version": 2,
-  "final_space": true,
   "blocks": [
     {
       "type": "prompt",
       "alignment": "left",
       "segments": [
-        // {
-        //   "type": "os",
-        //   "style": "diamond",
-        //   "foreground": "#000000",
-        //   "background": "#d3d7cf",
-        //   "leading_diamond": "\u256d\u2500\ue0b2",
-        //   "template": " {{ if .WSL }}WSL at {{ end }}{{.Icon}} "
-        // },
         {
-          "type": "path",
-          "style": "diamond",
-          "powerline_symbol": "\ue0b0",
-          "foreground": "#ffffff",
-          "background": "#2f322f",
+          "properties": {
+            "cache_duration": "none",
+            "style": "folder"
+          },
           "leading_diamond": "\ue0b6",
           "trailing_diamond": "\ue0b0",
           "template": " \ue5ff {{ .Path }} ",
-          "properties": {
-            "style": "folder"
-          }
+          "foreground": "#ffffff",
+          "powerline_symbol": "\ue0b0",
+          "background": "#2f322f",
+          "type": "path",
+          "style": "diamond"
         },
         {
-          "type": "git",
-          "style": "powerline",
-          "powerline_symbol": "\ue0b0",
-          "foreground": "#193549",
-          "background": "#2fc780",
-          "template": " {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0}} \uf692 {{ .StashCount }}{{ end }}{{ if gt .WorktreeCount 0}} \uf1bb {{ .WorktreeCount }}{{ end }} ",
           "properties": {
+            "cache_duration": "none",
             "fetch_stash_count": true,
             "fetch_status": true,
             "fetch_upstream_icon": true
-          }
+          },
+          "template": " {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0}} \uf692 {{ .StashCount }}{{ end }}{{ if gt .WorktreeCount 0}} \uf1bb {{ .WorktreeCount }}{{ end }} ",
+          "foreground": "#193549",
+          "powerline_symbol": "\ue0b0",
+          "background": "#2fc780",
+          "type": "git",
+          "style": "powerline"
         },
         {
-          "type": "root",
-          "style": "powerline",
-          "powerline_symbol": "\ue0b0",
-          "foreground": "#ffffff",
-          "background": "#6CA35E",
-          "template": " \uf0e7 "
-        },
-        {
-          "type": "dotnet",
-          "style": "powerline",
-          "powerline_symbol": "\ue0b0",
-          "foreground": "#ffffff",
-          "background": "#6CA35E",
-          "template": " \ue70c {{ if .Unsupported }}\uf071{{ else }}{{ .Full }}{{ end }} ",
           "properties": {
-            "fetch_version": true
-          }
+            "cache_duration": "none"
+          },
+          "template": " \uf0e7 ",
+          "foreground": "#ffffff",
+          "powerline_symbol": "\ue0b0",
+          "background": "#6CA35E",
+          "type": "root",
+          "style": "powerline"
         },
         {
-          "type": "exit",
-          "style": "powerline",
-          "powerline_symbol": "\ue0b0",
+          "properties": {
+            "cache_duration": "none",
+            "fetch_version": true
+          },
+          "template": " \ue70c {{ if .Unsupported }}\uf071{{ else }}{{ .Full }}{{ end }} ",
           "foreground": "#ffffff",
-          "background": "#2e9599",
-          "background_templates": [
-            "{{ if gt .Code 0 }}#f1184c{{ end }}"
-          ],
+          "powerline_symbol": "\ue0b0",
+          "background": "#6CA35E",
+          "type": "dotnet",
+          "style": "powerline"
+        },
+        {
+          "properties": {
+            "always_enabled": true,
+            "cache_duration": "none"
+          },
           "trailing_diamond": "\ue0b4",
           "template": " \ue23a{{ if gt .Code 0 }}\uf00d{{ else }}\uf42e{{ end }} ",
-          "properties": {
-            "always_enabled": true
-          }
+          "foreground": "#ffffff",
+          "powerline_symbol": "\ue0b0",
+          "background": "#2e9599",
+          "type": "exit",
+          "style": "powerline",
+          "background_templates": [
+            "{{ if gt .Code 0 }}#f1184c{{ end }}"
+          ]
         },
         {
-          "background": "#1a8ada",
-          "foreground": "#ffffff",
           "properties": {
+            "cache_duration": "none",
             "style": "roundrock",
             "threshold": 0
           },
-          "style": "diamond",
-          "template": " \ufa1e{{ .FormattedMs }}\u2800",
           "trailing_diamond": "\ue0b4",
-          "type": "executiontime"
+          "template": " {{ .FormattedMs }}\u2800",
+          "foreground": "#ffffff",
+          "background": "#1a8ada",
+          "type": "executiontime",
+          "style": "diamond"
         }
       ]
     }
-  ]
+  ],
+  "version": 3,
+  "final_space": true
 }

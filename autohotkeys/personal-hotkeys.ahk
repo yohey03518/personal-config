@@ -25,10 +25,6 @@ WinActivate erwin@TI03BY332
 WinActivate PowerShell
 return
 
-!2::
-WinActivate ,ahk_exe 1Password.exe
-return
-
 f7::
 clicktoggle := !clicktoggle
 
