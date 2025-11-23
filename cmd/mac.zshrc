@@ -62,8 +62,8 @@ zstyle ':completion:*:history-words' stop yes
 # 創建自定義歷史選擇 widget
 _select_history() {
   local selected
-  # 獲取去重後的歷史列表（最近50條，反向排列）
-  selected=$(fc -l 1 | awk '{$1=""; print substr($0,2)}' | awk '!seen[$0]++' | tail -50 | tail -r | fzf --height=40% --reverse --query="$LBUFFER")
+  # 獲取去重後的歷史列表（最近200條，反向排列）
+  selected=$(fc -l 1 | awk '{$1=""; print substr($0,2)}' | awk '!seen[$0]++' | tail -200 | tail -r | fzf --height=40% --reverse --query="$LBUFFER")
   
   if [[ -n "$selected" ]]; then
     LBUFFER="$selected"
