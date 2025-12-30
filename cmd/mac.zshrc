@@ -3,6 +3,9 @@ export LANG=en_US.UTF-8
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
+# git clone https://github.com/doggy8088/better-rm.git ~/better-rm
+alias rm='~/better-rm/better-rm'
+
 ##### Docker & Kubernetes #####
 autoload -Uz compinit
 compinit
@@ -22,6 +25,33 @@ alias gpp="git pull"
 alias gs="git status"
 
 alias cc=clear
+
+##### Port Check #####
+# Check which process is using a specific port
+port() {
+  if [[ -z "$1" ]]; then
+    echo "Usage: port <port_number>"
+    return 1
+  fi
+  
+  local port_result=$(lsof -i :$1 2>/dev/null)
+  
+  if [[ -n "$port_result" ]]; then
+    # Show listening process first (the actual port owner)
+    local listen_result=$(echo "$port_result" | grep -E "(COMMAND|LISTEN)")
+    if [[ -n "$listen_result" ]]; then
+      echo "=== Listening on port $1 ==="
+      echo "$listen_result"
+      echo ""
+    fi
+    
+    # Show all connections
+    echo "=== All connections on port $1 ==="
+    echo "$port_result"
+  else
+    echo "Port $1 is not in use."
+  fi
+}
 
 ##### History Configuration #####
 # 增加歷史記錄大小
