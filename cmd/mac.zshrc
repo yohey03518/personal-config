@@ -3,6 +3,9 @@ export LANG=en_US.UTF-8
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
+# ignore case for completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
 # git clone https://github.com/doggy8088/better-rm.git ~/better-rm
 alias rm='~/better-rm/better-rm'
 
