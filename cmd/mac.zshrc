@@ -21,6 +21,45 @@ alias kx=kubectx
 alias kns=kubens
 alias kgp="k get pod"
 
+# kgpw: Kubectl Get Pods Watch
+# 用法: kgpw [kubectl_arguments]
+# 例如: kgpw -n default -o wide --show-labels
+kgpw() {
+    # 設定刷新間隔 (秒)
+    local INTERVAL=2
+
+    # 定義清理函數：當按下 Ctrl+C 時，恢復游標並清除 Trap
+    cleanup() {
+        printf "\033[?25h" # 恢復顯示游標
+        trap - SIGINT SIGTERM
+        return
+    }
+
+    # 捕捉中斷訊號 (Ctrl+C)
+    trap cleanup SIGINT SIGTERM
+
+    # 隱藏游標 (避免刷新時游標閃爍)
+    printf "\033[?25l"
+
+    while true; do
+        # 1. 捕捉輸出到變數 (Buffer)
+        # --force-colors: 強制 kubecolor 輸出顏色代碼 (即使輸出到變數)
+        # 2>&1: 同時捕捉 stderr 錯誤訊息
+        output=$(kubecolor get pods "$@" --force-colors 2>&1)
+
+        # 2. 只有當獲取到數據後才刷新螢幕
+        # \033[H : 將游標移動到左上角 (Home)
+        # \033[J : 清除從游標處到螢幕底部的所有內容 (Clear to End of Screen)
+        printf "\033[H\033[J"
+
+        # 3. 輸出緩衝區內容
+        echo "$output"
+
+        # 4. 等待
+        sleep $INTERVAL
+    done
+}
+
 compdef _kubectl kubecolor k
 
 ##### Git #####
