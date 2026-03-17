@@ -9,6 +9,12 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 # git clone https://github.com/doggy8088/better-rm.git ~/better-rm
 alias rm='~/better-rm/better-rm'
 
+localdev() {
+  export LOCAL_DEV_ROOT=/Users/erwin.chang/git
+  export DOTNET_USE_POLLING_FILE_WATCHER=1
+  dotnet watch --project /Users/erwin.chang/git/dev-tools/Aspire/Host/Host.csproj --non-interactive
+}
+
 ##### Docker & Kubernetes #####
 autoload -Uz compinit
 compinit
