@@ -24,7 +24,6 @@ alias d=docker
 alias k=kubecolor
 
 alias kx=kubectx
-alias kns=kubens
 alias kgp="k get pod"
 
 # kgpw: Kubectl Get Pods Watch
@@ -64,6 +63,38 @@ kgpw() {
         # 4. 等待
         sleep $INTERVAL
     done
+}
+
+# kns: 切換 k8s namespace（從硬編碼列表選擇，因為通常沒有 list namespaces 權限）
+# 用法:
+#   kns          # 用 fzf 從下方列表選擇
+#   kns <name>   # 直接切換到指定 namespace
+KNS_NAMESPACES=(
+  b2c-payment
+  fatty
+  saiyan
+  trexdino
+  callcenter
+  geo-ip
+  infocenter
+  twsc-runner
+  fatty-argo
+  default
+)
+
+kns() {
+  local target
+  if [[ -n "$1" ]]; then
+    target="$1"
+  else
+    target=$(printf '%s\n' "${KNS_NAMESPACES[@]}" | fzf --height=40% --reverse --prompt='namespace> ')
+  fi
+
+  if [[ -z "$target" ]]; then
+    return 1
+  fi
+
+  kubens "$target"
 }
 
 compdef _kubectl kubecolor k
