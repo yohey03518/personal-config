@@ -18,11 +18,6 @@
         "command": "workbench.action.quickOpen"
     },
     {
-        "key": "alt+cmd+s",
-        "command": "workbench.action.toggleUnifiedSidebarFromKeyboard",
-        "when": "cursor.agentIdeUnification.enabled == true && !isAuxiliaryWindowFocusedContext"
-    },
-    {
         "key": "cmd+down",
         "command": "-editor.action.goToBottomHover",
         "when": "editorHoverFocused"
@@ -46,5 +41,10 @@
         "key": "alt+cmd+f",
         "command": "-editor.action.startFindReplaceAction",
         "when": "editorFocus || editorIsOpen"
+    },
+    {
+        "key": "ctrl+f12",
+        "command": "editor.action.goToImplementation",
+        "when": "editorHasImplementationProvider && editorTextFocus"
     }
 ]
