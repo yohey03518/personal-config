@@ -262,7 +262,7 @@ krl() {
       local key="${pod_name}::${container_name}"
       pod_containers[$key]="${req_mem_mib}|${limit_mem_mib}|${req_cpu}|${limit_cpu}"
     fi
-  done < <(echo "$pods_json" | jq -r '.items[] | 
+  done < <(printf '%s\n' "$pods_json" | jq -r '.items[] |
     .metadata.name as $pod | 
     .spec.containers[] | 
     "\($pod)|\(.name)|\(.resources.requests.memory // "0")|\(.resources.limits.memory // "0")|\(.resources.requests.cpu // "0")|\(.resources.limits.cpu // "0")"')
