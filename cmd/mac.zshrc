@@ -376,3 +376,15 @@ krl() {
     }
   '
 }
+
+# Initialize Oh My Posh
+if ! command -v oh-my-posh &> /dev/null; then
+  echo "oh-my-posh not found. Installing via Homebrew..."
+  brew install oh-my-posh
+fi
+
+if command -v oh-my-posh &> /dev/null; then
+  eval "$(oh-my-posh init zsh --config "/Users/erwin.chang/git/personal-config/cmd/.ohmyposh-customize.omp.json")"
+fi
+
+#oh-my-posh font install meslo
