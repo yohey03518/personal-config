@@ -9,6 +9,14 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 # git clone https://github.com/doggy8088/better-rm.git ~/better-rm
 alias rm='~/better-rm/better-rm'
 
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	command yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+	command rm -f -- "$tmp"
+}
+
 localdev() {
   export LOCAL_DEV_ROOT=/Users/erwin.chang/git
   export DOTNET_USE_POLLING_FILE_WATCHER=1
@@ -100,6 +108,29 @@ kns() {
 compdef _kubectl kubecolor k
 
 ##### Git #####
+git() {
+  if [[ $# -eq 2 && "$1" == "co" && ( "$2" == "main" || "$2" == "master" ) ]]; then
+    local target="$2"
+    local fallback
+    [[ "$target" == "main" ]] && fallback="master" || fallback="main"
+
+    if command git show-ref --verify --quiet "refs/heads/${target}" \
+      || command git show-ref --verify --quiet "refs/remotes/origin/${target}"; then
+      command git checkout "$target"
+    elif command git show-ref --verify --quiet "refs/heads/${fallback}" \
+      || command git show-ref --verify --quiet "refs/remotes/origin/${fallback}"; then
+      echo "Branch '${target}' not found, checking out '${fallback}'"
+      command git checkout "$fallback"
+    else
+      command git checkout "$target"
+    fi
+    return $?
+  fi
+  command git "$@"
+}
+
+compdef git=git
+
 alias gpp="git pull"
 alias gs="git status"
 
@@ -129,6 +160,25 @@ port() {
     echo "$port_result"
   else
     echo "Port $1 is not in use."
+  fi
+}
+
+##### Antigravity CLI #####
+# 包一層 agy 函式，新增 `agy log` 子命令即時查看 session log
+# agy log      -> 追蹤目前 session 的 log（-F 會在換 session 時自動重新開啟）
+# agy log mcp  -> 只顯示 MCP / connecting / error 行，用來找出卡住的 MCP server
+# 其他參數     -> 原封不動傳給真正的 agy 執行檔
+agy() {
+  if [[ "$1" == "log" ]]; then
+    shift
+    local logfile="$HOME/.gemini/antigravity-cli/cli.log"
+    if [[ "$1" == "mcp" ]]; then
+      tail -F "$logfile" | grep --line-buffered -iE "mcp|connecting|still|error"
+    else
+      tail -F "$logfile"
+    fi
+  else
+    command agy "$@"
   fi
 }
 
