@@ -118,3 +118,7 @@ nmap <S-Tab> :action EditorUnindentSelection<CR>
 vmap <Tab> :action EditorIndentLineOrSelection<CR>
 vmap <S-Tab> :action EditorUnindentSelection<CR>
 nmap zsp vi":action IntroduceParameter<CR>
+
+nnoremap zsw :action EditorToggleUseSoftWraps<CR>
+inoremap zsw <Esc>:action EditorToggleUseSoftWraps<CR>
+xnoremap zsw <Esc>:action EditorToggleUseSoftWraps<CR>
